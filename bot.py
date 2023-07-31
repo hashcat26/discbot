@@ -154,7 +154,7 @@ async def search_error(ctx, error):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
 
     if isinstance(error, commands.CommandInvokeError):
-        hoster.error(timers + f"| Error - {error}.".replace(":", ","))
+        hoster.error(timers + f" | Error - {error}.".replace(":", ","))
 
         detail = "The search bot didn't find any search results!"
         ticket = interface.Embed(
