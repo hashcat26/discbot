@@ -165,8 +165,7 @@ async def search_error(ctx, error):
         ticket.set_author(name = "Quick Researcher - Error", icon_url = "https://bit.ly/3al1Uac")
         ticket.add_field(name = "__Query Ambiguity:__", value = f"```>> {detail}```", inline = False)
 
-        # print(timers + f" | Error - {error}.".replace(":", ","))
-        print(f"{timers} | Error - {error.replace(':', ',')}.")
+        print(f"{timers}" + f" | Error - {error}.".replace(":", ","))
         await ctx.send(embed = ticket)
 
 
