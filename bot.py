@@ -41,8 +41,6 @@ async def on_command_error(ctx, error):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
 
     if isinstance(error, commands.CommandNotFound):
-        hoster.error(f"{timers} | Error - {error} in the available commands.")
-
         detail = "The specified command is invalid or not found!"
         ticket = interface.Embed(
             type = "rich",
@@ -50,11 +48,11 @@ async def on_command_error(ctx, error):
 
         ticket.set_author(name = "Quick Researcher - Error", icon_url = "https://bit.ly/3al1Uac")
         ticket.add_field(name = "__Invalid Command:__", value = f"```>> {detail}```", inline = False)
+
+        hoster.error(f"{timers} | Error - {error} in the available commands.")
         await ctx.send(embed = ticket)
 
     if isinstance(error, commands.MissingRequiredArgument):
-        hoster.error(f"{timers} | Error - Argument {error}")
-
         detail = "The required argument is missing or not given!"
         ticket = interface.Embed(
             type = "rich",
@@ -62,13 +60,13 @@ async def on_command_error(ctx, error):
 
         ticket.set_author(name = "Quick Researcher - Error", icon_url = "https://bit.ly/3al1Uac")
         ticket.add_field(name = "__Missing Keyword:__", value = f"```>> {detail}```", inline = False)
+
+        hoster.error(f"{timers} | Error - Argument {error}")
         await ctx.send(embed = ticket)
 
 @bot.command(aliases = ["u"])
 async def usage(ctx):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
-    hoster.info(f"{timers} | {bot.user} responded to a user usage.")
-
     manual = "Displays this help manual or card regarding\n   the usage of Quick Researcher Bot."
     search = "Find any information using the said command\n   followed by the search keywords."
     ticket = interface.Embed(
@@ -80,6 +78,8 @@ async def usage(ctx):
     ticket.add_field(name = "__$usage  or  $u:__", value = f"```>> {manual}```", inline = False)
     ticket.add_field(name = "__$search  or  $s:__", value = f"```>> {search}```", inline = False)
     ticket.set_footer(text = "\xA9 2023 By Dwight Dolatre. All Rights Reserved.")
+
+    hoster.info(f"{timers} | {bot.user} responded to a user usage.")
     await ctx.send(embed = ticket)
 
 @bot.command(aliases = ["s"])
@@ -87,8 +87,6 @@ async def search(ctx, *, question):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
 
     try:
-        hoster.info(f"{timers} | {bot.user} responded to a user query.")
-
         search = app.query(question)
         result = next(search.results).text
         answer = result.replace("\n", " ")
@@ -108,12 +106,11 @@ async def search(ctx, *, question):
             raise Exception
 
         else:
+            hoster.info(f"{timers} | {bot.user} responded to a user query.")
             await ctx.send(embed = ticket)
 
     except:
         try:
-            hoster.info(f"{timers} | {bot.user} responded to a user query.")
-
             search = "{0}".format(question)
             result = backup.summary(search, sentences = 2)
             answer = result.replace("\n", " ")
@@ -133,11 +130,10 @@ async def search(ctx, *, question):
                 raise Exception
 
             else:
+                hoster.info(f"{timers} | {bot.user} responded to a user query.")
                 await ctx.send(embed = ticket)
 
         except:
-            hoster.info(f"{timers} | {bot.user} responded to a user query.")
-
             search = getter.get(src_href + question)
             result = parser(search.text, src_pars).find_all("div", src_clss)[1].get_text()
             answer = result.replace("\n", " ").replace("   ", " - ").replace(" Wikipedia", "")
@@ -152,6 +148,8 @@ async def search(ctx, *, question):
             ticket.add_field(name = "__Search Results:__", value = f"```>> {answer}```", inline = False)
             ticket.add_field(name = "__Search Latency:__", value = f"```>> [{delays} ms]```", inline = False)
             ticket.set_footer(text = "Reference For Search Results: Google")
+
+            hoster.info(f"{timers} | {bot.user} responded to a user query.")
             await ctx.send(embed = ticket)
 
 @search.error
@@ -159,8 +157,6 @@ async def search_error(ctx, error):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
 
     if isinstance(error, commands.CommandInvokeError):
-        hoster.error(timers + f" | Error - {error}.".replace(":", ","))
-
         detail = "The search bot didn't find any search results!"
         ticket = interface.Embed(
             type = "rich",
@@ -168,6 +164,8 @@ async def search_error(ctx, error):
 
         ticket.set_author(name = "Quick Researcher - Error", icon_url = "https://bit.ly/3al1Uac")
         ticket.add_field(name = "__Query Ambiguity:__", value = f"```>> {detail}```", inline = False)
+
+        hoster.error(timers + f" | Error - {error}.".replace(":", ","))
         await ctx.send(embed = ticket)
 
 
