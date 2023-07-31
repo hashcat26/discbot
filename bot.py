@@ -34,14 +34,16 @@ app = engine.Client(app_iden)
 @bot.event
 async def on_ready():
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
-    print(timers, "| {0} is listening for commands.".format(bot.user))
+    # print(timers, "| {0} is listening for commands.".format(bot.user))
+    hoster.success(f"{timers} | {bot.user} is listening for commands.")
 
 @bot.event
 async def on_command_error(ctx, error):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
 
     if isinstance(error, commands.CommandNotFound):
-        print(timers, "| Error - {0} in the available commands.".format(error))
+        # print(timers, "| Error - {0} in the available commands.".format(error))
+        hoster.error(f"{timers} | Error - {error} in the available commands.")
         detail = "The specified command is invalid or not found!"
         ticket = interface.Embed(
             type = "rich",
@@ -52,7 +54,8 @@ async def on_command_error(ctx, error):
         await ctx.send(embed = ticket)
 
     if isinstance(error, commands.MissingRequiredArgument):
-        print(timers, "| Error - Argument {0}".format(error))
+        # print(timers, "| Error - Argument {0}".format(error))
+        hoster.error(f"{timers} | Error - Argument {error}")
         detail = "The required argument is missing or not given!"
         ticket = interface.Embed(
             type = "rich",
@@ -65,7 +68,8 @@ async def on_command_error(ctx, error):
 @bot.command(aliases = ["u"])
 async def usage(ctx):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
-    print(timers, "| {0} responded to a user usage.".format(bot.user))
+    # print(timers, "| {0} responded to a user usage.".format(bot.user))
+    hoster.info(f"{timers} | {bot.user} responded to a user usage.")
 
     manual = "Displays this help manual or card regarding\n   the usage of Quick Researcher Bot."
     search = "Find any information using the said command\n   followed by the search keywords."
@@ -83,7 +87,8 @@ async def usage(ctx):
 @bot.command(aliases = ["s"])
 async def search(ctx, *, question):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
-    print(timers, "| {0} responded to a user query.".format(bot.user))
+    # print(timers, "| {0} responded to a user query.".format(bot.user))
+    hoster.info(f"{timers} | {bot.user} responded to a user query.")
 
     try:
         search = app.query(question)
@@ -152,7 +157,8 @@ async def search_error(ctx, error):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
 
     if isinstance(error, commands.CommandInvokeError):
-        print(timers, "| Error - {0}.".format(error).replace(":", ","))
+        # print(timers, "| Error - {0}.".format(error).replace(":", ","))
+        hoster.error(f"{timers} | Error - {error}.".replace(":", ","))
         detail = "The search bot didn't find any search results!"
         ticket = interface.Embed(
             type = "rich",
