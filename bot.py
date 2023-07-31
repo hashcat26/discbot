@@ -85,9 +85,10 @@ async def usage(ctx):
 @bot.command(aliases = ["s"])
 async def search(ctx, *, question):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
-    hoster.info(f"{timers} | {bot.user} responded to a user query.")
 
     try:
+        hoster.info(f"{timers} | {bot.user} responded to a user query.")
+
         search = app.query(question)
         result = next(search.results).text
         answer = result.replace("\n", " ")
@@ -111,6 +112,8 @@ async def search(ctx, *, question):
 
     except:
         try:
+            hoster.info(f"{timers} | {bot.user} responded to a user query.")
+
             search = "{0}".format(question)
             result = backup.summary(search, sentences = 2)
             answer = result.replace("\n", " ")
@@ -133,6 +136,8 @@ async def search(ctx, *, question):
                 await ctx.send(embed = ticket)
 
         except:
+            hoster.info(f"{timers} | {bot.user} responded to a user query.")
+
             search = getter.get(src_href + question)
             result = parser(search.text, src_pars).find_all("div", src_clss)[1].get_text()
             answer = result.replace("\n", " ").replace("   ", " - ").replace(" Wikipedia", "")
