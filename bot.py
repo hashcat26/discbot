@@ -34,7 +34,7 @@ app = engine.Client(app_iden)
 @bot.event
 async def on_ready():
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
-    hoster.success(f"{timers} | {bot.user} is listening for commands.")
+    print(f"{timers} | {bot.user} is listening for commands.")
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -49,7 +49,7 @@ async def on_command_error(ctx, error):
         ticket.set_author(name = "Quick Researcher - Error", icon_url = "https://bit.ly/3al1Uac")
         ticket.add_field(name = "__Invalid Command:__", value = f"```>> {detail}```", inline = False)
 
-        hoster.error(f"{timers} | Error - {error} in the available commands.")
+        print(f"{timers} | Error - {error} in the available commands.")
         await ctx.send(embed = ticket)
 
     if isinstance(error, commands.MissingRequiredArgument):
@@ -61,7 +61,7 @@ async def on_command_error(ctx, error):
         ticket.set_author(name = "Quick Researcher - Error", icon_url = "https://bit.ly/3al1Uac")
         ticket.add_field(name = "__Missing Keyword:__", value = f"```>> {detail}```", inline = False)
 
-        hoster.error(f"{timers} | Error - Argument {error}")
+        print(f"{timers} | Error - Argument {error}")
         await ctx.send(embed = ticket)
 
 @bot.command(aliases = ["u"])
@@ -79,7 +79,7 @@ async def usage(ctx):
     ticket.add_field(name = "__$search  or  $s:__", value = f"```>> {search}```", inline = False)
     ticket.set_footer(text = "\xA9 2023 By Dwight Dolatre. All Rights Reserved.")
 
-    hoster.info(f"{timers} | {bot.user} responded to a user usage.")
+    print(f"{timers} | {bot.user} responded to a user usage.")
     await ctx.send(embed = ticket)
 
 @bot.command(aliases = ["s"])
@@ -106,7 +106,7 @@ async def search(ctx, *, question):
             raise Exception
 
         else:
-            hoster.info(f"{timers} | {bot.user} responded to a user query.")
+            print(f"{timers} | {bot.user} responded to a user query.")
             await ctx.send(embed = ticket)
 
     except:
@@ -130,7 +130,7 @@ async def search(ctx, *, question):
                 raise Exception
 
             else:
-                hoster.info(f"{timers} | {bot.user} responded to a user query.")
+                print(f"{timers} | {bot.user} responded to a user query.")
                 await ctx.send(embed = ticket)
 
         except:
@@ -149,7 +149,7 @@ async def search(ctx, *, question):
             ticket.add_field(name = "__Search Latency:__", value = f"```>> [{delays} ms]```", inline = False)
             ticket.set_footer(text = "Reference For Search Results: Google")
 
-            hoster.info(f"{timers} | {bot.user} responded to a user query.")
+            print(f"{timers} | {bot.user} responded to a user query.")
             await ctx.send(embed = ticket)
 
 @search.error
@@ -165,7 +165,8 @@ async def search_error(ctx, error):
         ticket.set_author(name = "Quick Researcher - Error", icon_url = "https://bit.ly/3al1Uac")
         ticket.add_field(name = "__Query Ambiguity:__", value = f"```>> {detail}```", inline = False)
 
-        hoster.error(timers + f" | Error - {error}.".replace(":", ","))
+        # print(timers + f" | Error - {error}.".replace(":", ","))
+        print(f"{timers} | Error - {error.replace(':', ',')}.")
         await ctx.send(embed = ticket)
 
 
