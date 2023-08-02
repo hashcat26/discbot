@@ -7,4 +7,4 @@ To create the environment, run `mkdir .venv && pipenv install -r requirements.tx
 
 Hosting locally:
 ---------------------------------
-To host the Discord bot locally before deploying in the cloud, do `streamlit run bot.py`.
+To host the Discord bot locally before deploying in the community cloud, do `streamlit run bot.py`.
