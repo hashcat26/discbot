@@ -36,7 +36,7 @@ async def on_ready():
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
     logger = "{0} | {1} is listening for commands.".format(timers, bot.user)
 
-    hoster.success(logger)
+    if hoster.session_state in globals(): hoster.success(logger)
     # print(f"{timers} | {bot.user} is listening for commands.")
 
 @bot.event
