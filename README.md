@@ -1,4 +1,4 @@
-# discbot [![Version](https://img.shields.io/badge/python-v.3.11.4-31BD50?logo=pypi)](https://www.python.org/downloads/release/python-3114)
+# discbot [![Version](https://img.shields.io/badge/python-v.3.11.4-31BD50?logo=python&logoColor=F5F5F5)](https://www.python.org/downloads/release/python-3114)
 Python Discord search bot hosted on the community cloud of [Streamlit](https://streamlit.io).
 
 Creating the environment:
