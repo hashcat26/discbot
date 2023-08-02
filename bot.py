@@ -34,10 +34,7 @@ app = engine.Client(app_iden)
 @bot.event
 async def on_ready():
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
-    logger = "{0} | {1} is listening for commands.".format(timers, bot.user)
-
-    if hoster.session_state in globals(): hoster.success(logger)
-    # print(f"{timers} | {bot.user} is listening for commands.")
+    print(f"{timers} | {bot.user} is listening for commands.")
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -70,6 +67,8 @@ async def on_command_error(ctx, error):
 @bot.command(aliases = ["u"])
 async def usage(ctx):
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
+    logger = "{0} | {1} responded to a user usage.".format(timers, bot.user)
+
     manual = "Displays this help manual or card regarding\n   the usage of Quick Researcher Bot."
     search = "Find any information using the said command\n   followed by the search keywords."
     ticket = interface.Embed(
@@ -82,7 +81,7 @@ async def usage(ctx):
     ticket.add_field(name = "__$search  or  $s:__", value = f"```>> {search}```", inline = False)
     ticket.set_footer(text = "\xA9 2023 By Dwight Dolatre. All Rights Reserved.")
 
-    print(f"{timers} | {bot.user} responded to a user usage.")
+    hoster.info(logger)
     await ctx.send(embed = ticket)
 
 @bot.command(aliases = ["s"])
