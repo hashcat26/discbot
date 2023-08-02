@@ -1,0 +1,10 @@
+*~
+._*
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.venv/
+.streamlit/credentials.toml
+.streamlit/secrets.toml
