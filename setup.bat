@@ -12,7 +12,7 @@ if not exist .venv (
 
 :venv
 pipenv install -r requirements.txt
-echo !.gitignore >> .venv\.gitignore
+del .venv\.gitignore
 
 :eof
 echo Project .venv folder initialized.
