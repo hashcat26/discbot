@@ -34,7 +34,10 @@ app = engine.Client(app_iden)
 @bot.event
 async def on_ready():
     timers = datetime.now().strftime("%m/%d/%y = %H:%M:%S")
-    print(f"{timers} | {bot.user} is listening for commands.")
+    logger = "{0} | {1} is listening for commands.".format(timers, bot.user)
+
+    hoster.success(logger) if hoster.session_state else print(logger)
+    # print(f"{timers} | {bot.user} is listening for commands.")
 
 @bot.event
 async def on_command_error(ctx, error):
