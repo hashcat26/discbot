@@ -81,7 +81,7 @@ async def usage(ctx):
     ticket.add_field(name = "__$search  or  $s:__", value = f"```>> {search}```", inline = False)
     ticket.set_footer(text = "\xA9 2023 By Dwight Dolatre. All Rights Reserved.")
 
-    if hoster.session_state: hoster.info(logger)
+    hoster.info(logger) if "hoster.session_state" in dir() else print(logger)
     await ctx.send(embed = ticket)
 
 @bot.command(aliases = ["s"])
