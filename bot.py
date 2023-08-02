@@ -21,11 +21,11 @@ src_clss = "BNeawe s3v9rd AP7Wnd"
 
 bot_name = "Quick Researcher"
 bot_desc = "discord search robot"
-bot_iden = hoster.secrets["bot_hash"]
+bot_iden = hoster.secrets.token["discord"]
 
 app_name = "Quick Researcher"
 app_desc = "search engine plugin"
-app_iden = hoster.secrets["app_hash"]
+app_iden = hoster.secrets.token["wolframalpha"]
 
 bot = commands.Bot(cmd_pref, intents = cmd_ints, help_command = None)
 app = engine.Client(app_iden)
